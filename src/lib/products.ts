@@ -1,0 +1,45 @@
+export interface Product {
+    slug: string;
+    name: string;
+    image: string;
+    alt: string;
+    /** Rendered size of the photo, so the grid reserves the right space before it loads. */
+    width: number;
+    height: number;
+}
+
+/** Ordered so the two upright photos sit on one row and the two wide ones on the next. */
+export const PRODUCTS: readonly Product[] = [
+    {
+        slug: 'skjaerefjol',
+        name: 'Skjærefjøl i bøk',
+        image: '/products/skjaerefjol.jpg',
+        alt: 'Skjærefjøl i bøk med gravert logo, med kniv og oppskåret pære',
+        width: 1050,
+        height: 1400,
+    },
+    {
+        slug: 'elgitar',
+        name: 'Elgitar i eik og bøk',
+        image: '/products/elgitar.jpg',
+        alt: 'Elgitar med kropp og hals i lyst tre, på stativ i en stue',
+        width: 1050,
+        height: 1400,
+    },
+    {
+        slug: 'primusbord',
+        name: 'Primusbord i Accoya',
+        image: '/products/primusbord.jpg',
+        alt: 'Primusbord i lyst tre som ligger over en gassboks, med brenneren gjennom utsparingen',
+        width: 1400,
+        height: 1050,
+    },
+    {
+        slug: 'glassbrikker',
+        name: 'Glassbrikke i bøk',
+        image: '/products/glassbrikker.jpg',
+        alt: 'Rund glassbrikke i tre på en stein, med barnåler i bakgrunnen',
+        width: 1400,
+        height: 1050,
+    },
+] as const;

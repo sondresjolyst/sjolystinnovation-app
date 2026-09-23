@@ -1,0 +1,18 @@
+{
+  "name": "Sjølyst Innovation",
+  "short_name": "Sjølyst",
+  "theme_color": "#0f1115",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "description": "Fra idé til ferdig produkt.",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
