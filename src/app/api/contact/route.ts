@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { contactSchema } from '@/lib/contactSchema';
 
-// Config is read per request, so a rotated key needs a restart, not a rebuild.
+// Environment is read per request.
 export const dynamic = 'force-dynamic';
 
 const BREVO_URL = 'https://api.brevo.com/v3/smtp/email';
@@ -10,27 +10,69 @@ const BREVO_URL = 'https://api.brevo.com/v3/smtp/email';
 const LIMIT = 5;
 const WINDOW_MS = 60 * 60 * 1000;
 
+/** Maximum callers tracked at once. The least recently seen is evicted past this. */
+const MAX_TRACKED_IPS = 10_000;
+
+/** Maximum accepted request body size. */
+const MAX_BODY_BYTES = 32_768;
+
 const hits = new Map<string, number[]>();
 
 function isRateLimited(ip: string): boolean {
     const now = Date.now();
     const recent = (hits.get(ip) ?? []).filter(t => now - t < WINDOW_MS);
-    recent.push(now);
+
+    // Re-insert to keep the map in least-recently-used order.
+    hits.delete(ip);
     hits.set(ip, recent);
 
-    // The map is per-process and would otherwise grow for the life of the pod.
-    if (hits.size > 5_000) {
-        for (const [key, times] of hits) {
-            if (times.every(t => now - t >= WINDOW_MS)) hits.delete(key);
-        }
+    if (recent.length >= LIMIT) return true;
+
+    recent.push(now);
+
+    while (hits.size > MAX_TRACKED_IPS) {
+        const oldest = hits.keys().next();
+        if (oldest.done) break;
+        hits.delete(oldest.value);
     }
 
-    return recent.length > LIMIT;
+    return false;
 }
 
+/** Client address, from x-real-ip or the rightmost x-forwarded-for entry. */
 function clientIp(req: Request): string {
+    const realIp = req.headers.get('x-real-ip')?.trim();
+    if (realIp) return realIp;
+
     const forwarded = req.headers.get('x-forwarded-for');
-    return forwarded?.split(',')[0]?.trim() || req.headers.get('x-real-ip') || 'unknown';
+    const hops = forwarded?.split(',').map(v => v.trim()).filter(Boolean) ?? [];
+    return hops.at(-1) ?? 'unknown';
+}
+
+/** Reads the request body, or null when it exceeds MAX_BODY_BYTES. */
+async function readBody(req: Request): Promise<string | null> {
+    const declared = Number(req.headers.get('content-length'));
+    if (Number.isFinite(declared) && declared > MAX_BODY_BYTES) return null;
+
+    const reader = req.body?.getReader();
+    if (!reader) return '';
+
+    const chunks: Uint8Array[] = [];
+    let total = 0;
+
+    for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        total += value.length;
+        if (total > MAX_BODY_BYTES) {
+            await reader.cancel();
+            return null;
+        }
+        chunks.push(value);
+    }
+
+    return new TextDecoder().decode(Buffer.concat(chunks));
 }
 
 function escapeHtml(value: string): string {
@@ -64,9 +106,14 @@ export async function POST(req: Request) {
         );
     }
 
+    const raw = await readBody(req);
+    if (raw === null) {
+        return NextResponse.json({ error: 'Meldingen er for stor.' }, { status: 413 });
+    }
+
     let body: unknown;
     try {
-        body = await req.json();
+        body = JSON.parse(raw);
     } catch {
         return NextResponse.json({ error: 'Ugyldig forespørsel.' }, { status: 400 });
     }
@@ -81,7 +128,7 @@ export async function POST(req: Request) {
 
     const { name, email, phone, message, website } = parsed.data;
 
-    // Honeypot: no real visitor fills this. Return success so the trap is not detectable.
+    // Honeypot. Answered as a success.
     if (website) return NextResponse.json({ message: 'Takk! Vi tar kontakt.' });
 
     const apiKey = process.env.BREVO_API_KEY;
@@ -116,15 +163,14 @@ export async function POST(req: Request) {
         });
 
         if (!res.ok) {
-            // Brevo's body can name the account and the key, so it stays in the log.
-            console.error('Brevo responded %s: %s', res.status, await res.text());
+            console.error('Brevo responded %s', res.status);
             return NextResponse.json(
                 { error: 'Klarte ikke å sende meldingen. Prøv igjen senere.' },
                 { status: 502 },
             );
         }
     } catch (error) {
-        console.error('Brevo request failed:', error);
+        console.error('Brevo request failed:', error instanceof Error ? error.message : 'unknown error');
         return NextResponse.json(
             { error: 'Klarte ikke å sende meldingen. Prøv igjen senere.' },
             { status: 502 },
