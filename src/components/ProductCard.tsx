@@ -10,7 +10,7 @@ export default function ProductCard({ product }: { product: Product }) {
                 alt={product.alt}
                 width={product.width}
                 height={product.height}
-                sizes="(min-width: 640px) 50vw, 100vw"
+                sizes="(min-width: 1024px) 492px, (min-width: 640px) 50vw, 100vw"
                 className="h-auto w-full bg-surface"
             />
 

@@ -33,7 +33,7 @@ export default function ProjectCard({ project, logo }: ProjectCardProps) {
             <p className="mt-1 text-sm font-medium text-muted">{project.tagline}</p>
             <p className="mt-4 text-sm leading-relaxed text-muted text-pretty">{project.description}</p>
 
-            <ul className="mt-6 flex flex-wrap gap-2">
+            <ul role="list" className="mt-6 flex flex-wrap gap-2">
                 {project.tags.map(tag => (
                     <li key={tag} className="rounded-md bg-surface px-2 py-1 text-xs text-muted">
                         {tag}

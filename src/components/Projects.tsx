@@ -9,7 +9,7 @@ export default async function Projects() {
 
     return (
         <Section id="prosjekter" title="Nettsteder og apper.">
-            <ul className="grid gap-5 sm:grid-cols-2">
+            <ul role="list" className="grid gap-5 sm:grid-cols-2">
                 {PROJECTS.map(project => (
                     <ProjectCard
                         key={project.slug}

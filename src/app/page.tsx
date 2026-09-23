@@ -5,6 +5,9 @@ import Products from '@/components/Products';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
+/** Matches the branding fetch, so the page lifetime is declared rather than inherited. */
+export const revalidate = 86400;
+
 export default function Home() {
     return (
         <>
