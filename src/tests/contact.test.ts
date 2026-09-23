@@ -225,3 +225,51 @@ describe('POST /api/contact limits', () => {
         expect((await POST(forged())).status).toBe(429);
     });
 });
+
+describe('POST /api/contact request shape', () => {
+    function withHeaders(headers: Record<string, string>) {
+        counter += 1;
+        return new Request('https://www.sjolystinnovation.no/api/contact', {
+            method: 'POST',
+            headers: { 'x-real-ip': `10.2.0.${counter}`, ...headers },
+            body: JSON.stringify(VALID),
+        });
+    }
+
+    it('rejects a body that is not declared as json', async () => {
+        const fetchSpy = vi.spyOn(globalThis, 'fetch');
+
+        const res = await POST(withHeaders({ 'content-type': 'text/plain' }));
+
+        expect(res.status).toBe(415);
+        expect(fetchSpy).not.toHaveBeenCalled();
+    });
+
+    it('rejects a request from another origin', async () => {
+        const fetchSpy = vi.spyOn(globalThis, 'fetch');
+
+        const res = await POST(
+            withHeaders({ 'content-type': 'application/json', origin: 'https://spam.example' }),
+        );
+
+        expect(res.status).toBe(403);
+        expect(fetchSpy).not.toHaveBeenCalled();
+    });
+
+    it('accepts a request whose origin matches the host', async () => {
+        vi.spyOn(globalThis, 'fetch').mockResolvedValue({
+            ok: true,
+            status: 201,
+            text: async () => '',
+        } as Response);
+
+        const res = await POST(
+            withHeaders({
+                'content-type': 'application/json',
+                origin: 'https://www.sjolystinnovation.no',
+            }),
+        );
+
+        expect(res.status).toBe(200);
+    });
+});

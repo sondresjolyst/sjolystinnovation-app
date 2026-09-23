@@ -49,6 +49,19 @@ function clientIp(req: Request): string {
     return hops.at(-1) ?? 'unknown';
 }
 
+/** True when the request carries no Origin, or one matching the host it was sent to. */
+function isSameOrigin(req: Request): boolean {
+    const origin = req.headers.get('origin');
+    if (!origin) return true;
+
+    try {
+        const host = req.headers.get('host') ?? new URL(req.url).host;
+        return new URL(origin).host === host;
+    } catch {
+        return false;
+    }
+}
+
 /** Reads the request body, or null when it exceeds MAX_BODY_BYTES. */
 async function readBody(req: Request): Promise<string | null> {
     const declared = Number(req.headers.get('content-length'));
@@ -99,6 +112,14 @@ function buildHtml(fields: { name: string; email: string; phone?: string; messag
 }
 
 export async function POST(req: Request) {
+    if (!req.headers.get('content-type')?.startsWith('application/json')) {
+        return NextResponse.json({ error: 'Ugyldig forespørsel.' }, { status: 415 });
+    }
+
+    if (!isSameOrigin(req)) {
+        return NextResponse.json({ error: 'Ugyldig forespørsel.' }, { status: 403 });
+    }
+
     if (isRateLimited(clientIp(req))) {
         return NextResponse.json(
             { error: 'For mange forsøk. Prøv igjen om en stund.' },
