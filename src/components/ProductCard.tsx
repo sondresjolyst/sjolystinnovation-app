@@ -1,20 +1,22 @@
 import Image from 'next/image';
 import type { Product } from '@/lib/products';
 
+/** A bare photo with a caption. The photo is the content, so it gets no box around it. */
 export default function ProductCard({ product }: { product: Product }) {
     return (
-        <li className="flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-background">
-            {/* Each photo keeps its own aspect ratio; a shared one crops the upright shots. */}
-            <Image
-                src={product.image}
-                alt={product.alt}
-                width={product.width}
-                height={product.height}
-                sizes="(min-width: 1024px) 492px, (min-width: 640px) 50vw, 100vw"
-                className="h-auto w-full bg-surface"
-            />
-
-            <h3 className="p-6 text-xl font-semibold tracking-tight">{product.name}</h3>
+        <li>
+            <figure>
+                {/* Each photo keeps its own aspect ratio; a shared one crops the upright shots. */}
+                <Image
+                    src={product.image}
+                    alt={product.alt}
+                    width={product.width}
+                    height={product.height}
+                    sizes="(min-width: 1024px) 492px, (min-width: 640px) 50vw, 100vw"
+                    className="h-auto w-full rounded-2xl bg-surface"
+                />
+                <figcaption className="mt-3 text-base font-medium tracking-tight">{product.name}</figcaption>
+            </figure>
         </li>
     );
 }

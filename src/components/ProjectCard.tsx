@@ -9,7 +9,10 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project, logo }: ProjectCardProps) {
     return (
-        <li className="group relative flex flex-col rounded-2xl border border-line bg-background p-6 transition-shadow hover:shadow-[0_1px_24px_rgba(15,17,21,0.07)]">
+        <li
+            id={`prosjekt-${project.slug}`}
+            className="group relative flex flex-col rounded-2xl border border-line bg-background p-6"
+        >
             <div className="h-0.5 w-10 rounded-full" style={{ backgroundColor: project.accent }} aria-hidden="true" />
 
             <div className="mt-6 flex items-start justify-between gap-4">
@@ -23,9 +26,7 @@ export default function ProjectCard({ project, logo }: ProjectCardProps) {
                 </div>
 
                 {project.status === 'in-development' && (
-                    <span className="rounded-full border border-line bg-surface px-2.5 py-1 text-xs font-medium text-muted">
-                        Under utvikling
-                    </span>
+                    <span className="text-xs font-medium text-muted">Under utvikling</span>
                 )}
             </div>
 
@@ -33,14 +34,7 @@ export default function ProjectCard({ project, logo }: ProjectCardProps) {
             <p className="mt-1 text-sm font-medium text-muted">{project.tagline}</p>
             <p className="mt-4 text-sm leading-relaxed text-muted text-pretty">{project.description}</p>
 
-            <ul role="list" className="mt-6 flex flex-wrap gap-2">
-                {project.tags.map(tag => (
-                    <li key={tag} className="rounded-md bg-surface px-2 py-1 text-xs text-muted">
-                        {tag}
-                    </li>
-                ))}
-            </ul>
-
+            {/* The overlay makes the whole card the link, so nothing else inside may be interactive. */}
             <a
                 href={project.url}
                 target="_blank"
