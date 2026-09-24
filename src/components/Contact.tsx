@@ -6,9 +6,10 @@ export default function Contact() {
         <Section
             id="kontakt"
             title="Har du noe du vil ha bygget?"
-            intro="Fortell kort hva du trenger, så svarer vi med hva det vil kreve, og hva det vil koste."
+            intro="Fortell kort hva du trenger. Vi svarer på e-post med et prisestimat, hva det vil kreve, og når vi kan starte."
+            tinted
         >
-            <div className="max-w-2xl rounded-2xl border border-line bg-background p-6 sm:p-8">
+            <div className="max-w-2xl">
                 <ContactForm />
             </div>
         </Section>

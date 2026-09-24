@@ -10,7 +10,6 @@ const withApi: Project = {
     url: 'https://example.no',
     linkText: 'example.no',
     status: 'live',
-    tags: [],
     accent: '#000000',
     fallbackLogo: '/projects/test.png',
     brandingApi: 'https://api.example.no/api/branding',

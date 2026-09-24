@@ -1,12 +1,18 @@
 @import "tailwindcss";
 
+/* Geist is self-hosted by next/font under /_next/static/media, so the CSP's font-src 'self' holds.
+   `inline` embeds the stack in the utilities, since the variable is set by a class on <html>. */
+@theme inline {
+    --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
 /* Own identity, deliberately not a blend of the four customer palettes: near-black ink on white,
    one indigo accent. The project accents only ever appear on their own cards. */
 @theme {
     --color-background: #ffffff;
     --color-surface: #f6f6f8;
     --color-foreground: #0f1115;
-    --color-muted: #6b7280;
+    --color-muted: #5b616e;
     --color-line: #e5e7eb;
     --color-primary: #4f46e5;
     --color-primary-foreground: #ffffff;
@@ -39,6 +45,20 @@ body {
 }
 
 body {
-    font-family: var(--font-sans, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif);
     -webkit-font-smoothing: antialiased;
+}
+
+/* Curvature-continuous (G2) corners on everything that has a radius: cards, photos, buttons, fields.
+   `squircle` is superellipse(2). Browsers without corner-shape keep the plain circular radius. */
+@layer base {
+    *,
+    ::before,
+    ::after {
+        corner-shape: squircle;
+    }
+}
+
+:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
 }

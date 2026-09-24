@@ -8,7 +8,6 @@ export interface Project {
     url: string;
     linkText: string;
     status: ProjectStatus;
-    tags: readonly string[];
     /** Accent used for the card's rule and logo chip. */
     accent: string;
     /** Bundled logo. Always present, and what renders when `brandingApi` is absent or down. */
@@ -24,13 +23,12 @@ export const PROJECTS: readonly Project[] = [
     {
         slug: 'altinnendata',
         name: 'Altinnendata',
-        tagline: 'Lokal bygging og installasjon av stasjonære PC-er',
+        tagline: 'Spill-PC-er bygget og installert lokalt',
         description:
-            'Maskinkatalog med prisforespørsel. Kunden publiserer nye maskiner selv, og oversettelsen til engelsk går automatisk.',
+            'Nettbutikk for ferdigbygde spill-PC-er. Du ser hvilke maskiner som er ledige og hva de koster, og kan be om tilbud på en maskin tilpasset det du skal bruke den til og budsjettet ditt.',
         url: 'https://www.altinnendata.no',
         linkText: 'altinnendata.no',
         status: 'live',
-        tags: ['Nettsted', 'Produktkatalog', 'Drift'],
         accent: '#00887a',
         fallbackLogo: '/projects/altinnendata.png',
         brandingApi: 'https://altinnendata-api.prod.tumogroup.com/api/branding',
@@ -40,11 +38,10 @@ export const PROJECTS: readonly Project[] = [
         name: 'NS Tuning',
         tagline: 'Dynotesting og motoroptimalisering',
         description:
-            'Hver dynokjøring publiseres med måledata og nedlastbar rapport. Kunden setter sammen forsiden og innholdet selv.',
+            'Her ser du hva bilene faktisk yter. Hver dynokjøring publiseres med målt effekt og dreiemoment, og vil du teste din egen bil, booker du en kjøring rett fra siden.',
         url: 'https://www.nstuning.no',
         linkText: 'nstuning.no',
         status: 'live',
-        tags: ['Nettsted', 'Innholdsstyring', 'Drift'],
         accent: '#ffd400',
         fallbackLogo: '/projects/nstuning.png',
         brandingApi: 'https://nstuning-api.prod.tumogroup.com/api/branding',
@@ -52,13 +49,12 @@ export const PROJECTS: readonly Project[] = [
     {
         slug: 'garge',
         name: 'Garge',
-        tagline: 'Sensorer og styring for garasjen',
+        tagline: 'Følg med på garasjen fra mobilen',
         description:
-            'Sensorene måler og loggfører kontinuerlig, og automasjoner slår strømuttak av og på etter grensene du setter.',
+            'Små sensorer måler temperatur, fukt og batterispenning, og Garge viser det live i appen. Du ser når et batteri begynner å bli dårlig, enten det sitter i bilen, båten eller bobilen, og kan styre smartplugger uten å være hjemme.',
         url: 'https://www.garge.no',
         linkText: 'garge.no',
         status: 'live',
-        tags: ['Maskinvare', 'Overvåking', 'Automasjon'],
         accent: '#0284c7',
         fallbackLogo: '/projects/garge.png',
     },
@@ -67,11 +63,10 @@ export const PROJECTS: readonly Project[] = [
         name: 'Pyttogpanne',
         tagline: 'Turmat laget i én panne',
         description:
-            'Oppskriftene ligger lagret på telefonen og fungerer uten dekning. Handleliste og porsjonsberegning er innebygd.',
+            'Oppskrifter på turmat du kan følge med brenneren i gang og uten dekning. Velg antall porsjoner, send ingrediensene til handlelisten, og lagre favorittene dine uten å lage konto.',
         url: 'https://www.instagram.com/pyttogpanne/',
         linkText: 'Følg på Instagram',
         status: 'in-development',
-        tags: ['Mobilapp', 'iOS og Android', 'Oppskrifter'],
         accent: '#C0431C',
         fallbackLogo: '/projects/pyttogpanne.png',
     },

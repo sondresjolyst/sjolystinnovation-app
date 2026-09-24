@@ -8,7 +8,11 @@ export default async function Projects() {
     const logos = await fetchLogos(PROJECTS);
 
     return (
-        <Section id="prosjekter" title="Nettsteder og apper.">
+        <Section
+            id="prosjekter"
+            title="Nettsteder, apper og elektronikk vi har levert."
+            intro="Programvare og maskinvare som er i bruk i dag, pluss én app som er på vei. Åpne et kort for å se prosjektet."
+        >
             <ul role="list" className="grid gap-5 sm:grid-cols-2">
                 {PROJECTS.map(project => (
                     <ProjectCard

@@ -4,6 +4,13 @@ const nextConfig: NextConfig = {
     output: 'standalone',
     poweredByHeader: false,
 
+    images: {
+        // Also the browser's max-age, and the optimizer URL carries no content hash, so a regenerated
+        // photo under the same name is stale for returning visitors this long. One day keeps the
+        // five photos cheap to serve without making a photo swap invisible for weeks.
+        minimumCacheTTL: 86_400,
+    },
+
     async headers() {
         const isDev = process.env.NODE_ENV !== 'production';
         const scriptSrc = isDev

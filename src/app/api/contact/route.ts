@@ -150,7 +150,7 @@ export async function POST(req: Request) {
     const { name, email, phone, message, website } = parsed.data;
 
     // Honeypot. Answered as a success.
-    if (website) return NextResponse.json({ message: 'Takk! Vi tar kontakt.' });
+    if (website) return NextResponse.json({ message: 'Meldingen er sendt. Vi svarer på e-post.' });
 
     const apiKey = process.env.BREVO_API_KEY;
     const senderEmail = process.env.BREVO_SENDER_EMAIL;
@@ -198,5 +198,5 @@ export async function POST(req: Request) {
         );
     }
 
-    return NextResponse.json({ message: 'Takk! Vi tar kontakt.' });
+    return NextResponse.json({ message: 'Meldingen er sendt. Vi svarer på e-post.' });
 }

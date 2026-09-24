@@ -3,6 +3,10 @@ interface Company {
     name: string;
     /** Registered foretaksnavn, for the footer and any formal context. */
     legalName: string;
+    /** Follows the name in the page title and the manifest. */
+    tagline: string;
+    /** The person a customer deals with. Shown with the portrait in the about block. */
+    contactPerson: string;
     orgNumber: string;
     /** Shown next to the org number, which foretaksregisterloven § 10-2 requires of an AS. */
     register: string;
@@ -18,6 +22,8 @@ interface Company {
 export const COMPANY: Company = {
     name: "Sjølyst Innovation",
     legalName: "Sjølyst Innovation AS",
+    tagline: "Fra idé til produkt",
+    contactPerson: "Sondre Sjølyst",
     orgNumber: "938 517 789",
     register: "Foretaksregisteret",
     vatRegistered: false,

@@ -6,7 +6,7 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "description": "Fra idé til ferdig produkt.",
+  "description": "Fra idé til produkt.",
   "icons": [
     {
       "src": "icon.png",

@@ -1,14 +1,16 @@
+import { COMPANY } from '@/lib/company';
+
 export default function Hero() {
     return (
         <section className="border-b border-line bg-foreground text-background">
             <div className="mx-auto max-w-5xl px-5 py-24 sm:py-32">
-                <p className="text-sm font-medium tracking-widest text-background/55 uppercase">
-                    Sjølyst Innovation AS
-                </p>
-
-                <h1 className="mt-6 max-w-3xl text-4xl font-semibold tracking-tight text-balance sm:text-6xl">
-                    Fra idé til produkt.
+                <h1 className="max-w-3xl text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-6xl">
+                    {COMPANY.tagline}.
                 </h1>
+
+                <p className="mt-6 max-w-2xl text-lg leading-relaxed text-background/75 text-pretty sm:text-xl">
+                    Vi bygger nettsteder, apper og elektronikk, og lager produkter i tre og metall.
+                </p>
 
                 <div className="mt-10 flex flex-wrap gap-3">
                     <a
