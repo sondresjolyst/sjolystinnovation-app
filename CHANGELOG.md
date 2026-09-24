@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.0.1...v1.1.0) (2026-09-24)
+
+
+### Features
+
+* refresh site appearance and wording ([#8](https://github.com/sondresjolyst/sjolystinnovation-app/issues/8)) ([32b8922](https://github.com/sondresjolyst/sjolystinnovation-app/commit/32b892258a08f0c67594b2e21219529d881a1988))
+
 ## [1.0.1](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.0.0...v1.0.1) (2026-09-23)
 
 
