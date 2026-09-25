@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Photo from '@/components/Photo';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import { COMPANY } from '@/lib/company';
 
@@ -33,8 +33,8 @@ export default function About() {
                     </div>
 
                     <figure className="mx-auto w-full max-w-sm lg:mx-0 lg:max-w-none">
-                        <Image
-                            src="/about/portrait.jpg"
+                        <Photo
+                            src="/about/portrait"
                             alt={`${COMPANY.contactPerson} foran Pantheon i Roma`}
                             width={800}
                             height={1000}

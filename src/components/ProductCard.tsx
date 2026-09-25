@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Photo from '@/components/Photo';
 import type { Product } from '@/lib/products';
 
 /** A bare photo with a caption. The photo is the content, so it gets no box around it. */
@@ -7,7 +7,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <li>
             <figure>
                 {/* Each photo keeps its own aspect ratio; a shared one crops the upright shots. */}
-                <Image
+                <Photo
                     src={product.image}
                     alt={product.alt}
                     width={product.width}

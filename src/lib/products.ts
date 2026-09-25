@@ -1,6 +1,7 @@
 export interface Product {
     slug: string;
     name: string;
+    /** Path without the width suffix or extension. */
     image: string;
     alt: string;
     /** Rendered size of the photo, so the grid reserves the right space before it loads. */
@@ -13,7 +14,7 @@ export const PRODUCTS: readonly Product[] = [
     {
         slug: 'skjaerefjol',
         name: 'Skjærefjøl i bøk',
-        image: '/products/skjaerefjol.jpg',
+        image: '/products/skjaerefjol',
         alt: 'Skjærefjøl i bøk med gravert logo, med kniv og oppskåret pære',
         width: 750,
         height: 1000,
@@ -21,7 +22,7 @@ export const PRODUCTS: readonly Product[] = [
     {
         slug: 'elgitar',
         name: 'Elgitar i eik og bøk',
-        image: '/products/elgitar.jpg',
+        image: '/products/elgitar',
         alt: 'Elgitar med kropp og hals i lyst tre, på stativ i en stue',
         width: 750,
         height: 1000,
@@ -29,7 +30,7 @@ export const PRODUCTS: readonly Product[] = [
     {
         slug: 'primusbord',
         name: 'Primusbord i Accoya',
-        image: '/products/primusbord.jpg',
+        image: '/products/primusbord',
         alt: 'Primusbord i lyst tre som ligger over en gassboks, med brenneren gjennom utsparingen',
         width: 1000,
         height: 750,
@@ -37,7 +38,7 @@ export const PRODUCTS: readonly Product[] = [
     {
         slug: 'glassbrikker',
         name: 'Glassbrikke i bøk',
-        image: '/products/glassbrikker.jpg',
+        image: '/products/glassbrikker',
         alt: 'Rund glassbrikke i tre på en stein, med barnåler i bakgrunnen',
         width: 1000,
         height: 750,
