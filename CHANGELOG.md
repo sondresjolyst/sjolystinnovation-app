@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.1.0...v1.1.1) (2026-09-25)
+
+
+### Bug Fixes
+
+* let dependabot track the base image ([#10](https://github.com/sondresjolyst/sjolystinnovation-app/issues/10)) ([e87824f](https://github.com/sondresjolyst/sjolystinnovation-app/commit/e87824f1738bbc8e07d1627aa0dbceeac542bec2))
+
 ## [1.1.0](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.0.1...v1.1.0) (2026-09-24)
 
 
