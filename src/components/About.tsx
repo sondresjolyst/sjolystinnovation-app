@@ -38,7 +38,6 @@ export default function About() {
                             alt={`${COMPANY.contactPerson} foran Pantheon i Roma`}
                             width={800}
                             height={1000}
-                            sizes="(min-width: 1024px) 380px, (min-width: 640px) 384px, 100vw"
                             className="h-auto w-full rounded-2xl border border-line bg-surface"
                         />
                         <figcaption className="mt-3 text-sm text-muted">{COMPANY.contactPerson}</figcaption>

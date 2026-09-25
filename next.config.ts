@@ -39,6 +39,14 @@ const nextConfig: NextConfig = {
 
         return [
             {
+                // Files under public/ are served with no max-age, so every repeat view revalidates
+                // each photo. They are content that changes only when a photo is replaced.
+                source: '/:path*.(jpg|png|svg|ico|webp)',
+                headers: [
+                    { key: 'Cache-Control', value: 'public, max-age=3600, stale-while-revalidate=86400' },
+                ],
+            },
+            {
                 source: '/:path*',
                 headers: [
                     { key: 'X-Content-Type-Options', value: 'nosniff' },
