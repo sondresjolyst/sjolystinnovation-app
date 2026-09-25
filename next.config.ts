@@ -3,16 +3,18 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
     output: 'standalone',
     poweredByHeader: false,
-    // The container runs with a read-only root filesystem, and Next writes revalidated pages to
-    // .next/server/app rather than to .next/cache. Keep the incremental cache in memory.
-    experimental: { isrFlushToDisk: false },
 
+    // scripts/prepare-images.mjs already resizes every photo to its display size and encodes it
+    // as mozjpeg, so the runtime optimizer would re-encode work that is already done. Serving the
+    // files as they are also keeps the root filesystem read-only, since the optimizer's only
+    // cache is on disk.
     images: {
-        // Also the browser's max-age, and the optimizer URL carries no content hash, so a regenerated
-        // photo under the same name is stale for returning visitors this long. One day keeps the
-        // five photos cheap to serve without making a photo swap invisible for weeks.
-        minimumCacheTTL: 86_400,
+        unoptimized: true,
     },
+
+    // Next writes revalidated pages to .next/server/app rather than to .next/cache, which the
+    // read-only root filesystem does not allow. Keep the incremental cache in memory.
+    experimental: { isrFlushToDisk: false },
 
     async headers() {
         const isDev = process.env.NODE_ENV !== 'production';
