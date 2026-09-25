@@ -3,6 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
     output: 'standalone',
     poweredByHeader: false,
+    // The container runs with a read-only root filesystem, and Next writes revalidated pages to
+    // .next/server/app rather than to .next/cache. Keep the incremental cache in memory.
+    experimental: { isrFlushToDisk: false },
 
     images: {
         // Also the browser's max-age, and the optimizer URL carries no content hash, so a regenerated

@@ -1,4 +1,4 @@
-FROM node:26.8-slim AS builder
+FROM node:26.10.0-slim AS builder
 
 # Names the environment being built for. Anything but prod/production serves a robots.txt that
 # disallows crawling, so a test host is not indexed as a duplicate of the live site.
@@ -17,7 +17,7 @@ ENV NODE_ENV=production
 
 RUN npm run build
 
-FROM node:26.8-slim AS runner
+FROM node:26.10.0-slim AS runner
 
 WORKDIR /app
 
