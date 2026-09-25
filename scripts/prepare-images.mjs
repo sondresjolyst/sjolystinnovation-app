@@ -1,6 +1,7 @@
 /**
- * Reads the sources listed in IMAGES, applies EXIF rotation, resizes the longest edge to MAX_EDGE,
- * crops to `ratio` where given, strips metadata and writes JPEG into the entry's output directory.
+ * Reads the originals in assets/photos, applies EXIF rotation, crops to `ratio` where given, strips
+ * metadata and writes each photo at every width in WIDTHS, as AVIF and as JPEG. The page serves
+ * these files directly, so the sizes written here are the sizes the browser downloads.
  */
 import { mkdir, stat } from 'node:fs/promises';
 import { basename, join } from 'node:path';
@@ -8,9 +9,11 @@ import sharp from 'sharp';
 
 const DEFAULT_OUT_DIR = 'public/products';
 
-/** Longest edge of the written image. A card is at most 492 CSS px wide, so 1000 covers 2x screens. */
-const MAX_EDGE = 1000;
+/** A card is at most 492 CSS px wide, so 1000 covers 2x screens and 640 covers a phone. */
+const WIDTHS = [640, 1000];
+const MAX_EDGE = Math.max(...WIDTHS);
 const QUALITY = 78;
+const AVIF_QUALITY = 55;
 
 /**
  * Add a line per photo: the source on disk, and the name it gets in the output directory.
@@ -19,12 +22,12 @@ const QUALITY = 78;
  * part of the frame; `ratio` then applies to that box.
  */
 const IMAGES = [
-    { source: 'E:/Downloads/Photos-1-001-8/20260308_104824.jpg', name: 'skjaerefjol.jpg', ratio: [3, 4] },
-    { source: 'E:/Downloads/Photos-1-001-8/PXL_20260307_142016668.jpg', name: 'glassbrikker.jpg', ratio: [4, 3] },
-    { source: 'E:/Downloads/Photos-1-001-8/PXL_20260818_140209953.jpg', name: 'primusbord.jpg', ratio: [4, 3] },
-    { source: 'E:/Downloads/Photos-1-001-8/PXL_20260201_132854808.jpg', name: 'elgitar.jpg', ratio: [3, 4] },
+    { source: 'assets/photos/skjaerefjol.jpg', name: 'skjaerefjol.jpg', ratio: [3, 4] },
+    { source: 'assets/photos/glassbrikker.jpg', name: 'glassbrikker.jpg', ratio: [4, 3] },
+    { source: 'assets/photos/primusbord.jpg', name: 'primusbord.jpg', ratio: [4, 3] },
+    { source: 'assets/photos/elgitar.jpg', name: 'elgitar.jpg', ratio: [3, 4] },
     {
-        source: 'E:/Downloads/PXL_20250927_152356396.jpg',
+        source: 'assets/photos/portrait.jpg',
         name: 'portrait.jpg',
         outDir: 'public/about',
         ratio: [4, 5],
@@ -35,36 +38,45 @@ const IMAGES = [
 
 async function prepare({ source, name, ratio, extract, outDir = DEFAULT_OUT_DIR }) {
     await mkdir(outDir, { recursive: true });
-    const target = join(outDir, name);
-    let input = sharp(source).rotate();
-    const { width, height } = await input.metadata();
-    if (extract) input = input.extract(extract);
-
-    const resize = ratio
-        ? {
-            // Keep the longest edge at MAX_EDGE whichever way round the target shape is.
-            width: ratio[0] >= ratio[1] ? MAX_EDGE : Math.round((MAX_EDGE * ratio[0]) / ratio[1]),
-            height: ratio[0] >= ratio[1] ? Math.round((MAX_EDGE * ratio[1]) / ratio[0]) : MAX_EDGE,
-            fit: 'cover',
-            // Crops around the busiest part of the frame, which is the object rather than the backdrop.
-            position: sharp.strategy.attention,
-        }
-        : {
-            width: width >= height ? MAX_EDGE : undefined,
-            height: height > width ? MAX_EDGE : undefined,
-            withoutEnlargement: true,
-        };
-
-    const output = await input
-        .resize(resize)
-        .jpeg({ quality: QUALITY, mozjpeg: true })
-        .toFile(target);
-
+    const { width, height } = await sharp(source).rotate().metadata();
     const before = (await stat(source)).size;
-    console.log(
-        `${basename(source)} -> ${target}  ${width}x${height} to ${output.width}x${output.height}  ` +
-        `${(before / 1e6).toFixed(1)} MB to ${(output.size / 1e3).toFixed(0)} kB`,
-    );
+    const stem = name.replace(/\.[^.]+$/, '');
+
+    for (const edge of WIDTHS) {
+        // sharp applies one resize per pipeline, so each width is built from the source.
+        let input = sharp(source).rotate();
+        if (extract) input = input.extract(extract);
+
+        const resize = ratio
+            ? {
+                // Keep the longest edge at `edge` whichever way round the target shape is.
+                width: ratio[0] >= ratio[1] ? edge : Math.round((edge * ratio[0]) / ratio[1]),
+                height: ratio[0] >= ratio[1] ? Math.round((edge * ratio[1]) / ratio[0]) : edge,
+                fit: 'cover',
+                // Crops around the busiest part of the frame, which is the object rather than the backdrop.
+                position: sharp.strategy.attention,
+            }
+            : {
+                width: width >= height ? edge : undefined,
+                height: height > width ? edge : undefined,
+                withoutEnlargement: true,
+            };
+
+        const scaled = input.resize(resize);
+        const jpeg = await scaled.clone()
+            .jpeg({ quality: QUALITY, mozjpeg: true })
+            .toFile(join(outDir, `${stem}-${edge}.jpg`));
+        const avif = await scaled.clone()
+            .avif({ quality: AVIF_QUALITY })
+            .toFile(join(outDir, `${stem}-${edge}.avif`));
+
+        console.log(
+            `${basename(source)} -> ${stem}-${edge}  ${jpeg.width}x${jpeg.height}  ` +
+            `jpeg ${(jpeg.size / 1e3).toFixed(0)} kB, avif ${(avif.size / 1e3).toFixed(0)} kB`,
+        );
+    }
+
+    console.log(`${basename(source)}  source ${width}x${height}, ${(before / 1e6).toFixed(1)} MB`);
 }
 
 if (IMAGES.length === 0) {

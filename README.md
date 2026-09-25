@@ -25,7 +25,7 @@ The site runs on empty environment variables. Only the contact form needs them f
 | `npm start` | Serves the production build |
 | `npm test` | Vitest |
 | `npm run lint` | ESLint |
-| `npm run prepare-images` | Rebuilds the photos in `public/products` and `public/about`; pass file names to limit it |
+| `npm run prepare-images` | Rebuilds the photos in `public/products` and `public/about` from the originals in `assets/photos`; pass file names to limit it |
 
 ## Environment
 
