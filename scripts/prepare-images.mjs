@@ -1,17 +1,15 @@
 /**
  * Reads the originals in assets/photos, applies EXIF rotation, crops to `ratio` where given, strips
- * metadata and writes each photo at every width in WIDTHS, as AVIF and as JPEG. The page serves
+ * metadata and writes each photo at every edge in PHOTO_EDGES, as AVIF and as JPEG. The page serves
  * these files directly, so the sizes written here are the sizes the browser downloads.
  */
 import { mkdir, stat } from 'node:fs/promises';
 import { basename, join } from 'node:path';
 import sharp from 'sharp';
+import { PHOTO_EDGES, photoFile } from '../src/lib/photos.ts';
 
 const DEFAULT_OUT_DIR = 'public/products';
 
-/** A card is at most 492 CSS px wide, so 1000 covers 2x screens and 640 covers a phone. */
-const WIDTHS = [640, 1000];
-const MAX_EDGE = Math.max(...WIDTHS);
 const QUALITY = 78;
 const AVIF_QUALITY = 55;
 
@@ -42,7 +40,7 @@ async function prepare({ source, name, ratio, extract, outDir = DEFAULT_OUT_DIR 
     const before = (await stat(source)).size;
     const stem = name.replace(/\.[^.]+$/, '');
 
-    for (const edge of WIDTHS) {
+    for (const edge of PHOTO_EDGES) {
         // sharp applies one resize per pipeline, so each width is built from the source.
         let input = sharp(source).rotate();
         if (extract) input = input.extract(extract);
@@ -65,10 +63,10 @@ async function prepare({ source, name, ratio, extract, outDir = DEFAULT_OUT_DIR 
         const scaled = input.resize(resize);
         const jpeg = await scaled.clone()
             .jpeg({ quality: QUALITY, mozjpeg: true })
-            .toFile(join(outDir, `${stem}-${edge}.jpg`));
+            .toFile(join(outDir, photoFile(stem, edge, 'jpg')));
         const avif = await scaled.clone()
             .avif({ quality: AVIF_QUALITY })
-            .toFile(join(outDir, `${stem}-${edge}.avif`));
+            .toFile(join(outDir, photoFile(stem, edge, 'avif')));
 
         console.log(
             `${basename(source)} -> ${stem}-${edge}  ${jpeg.width}x${jpeg.height}  ` +

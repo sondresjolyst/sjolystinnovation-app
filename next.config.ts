@@ -12,8 +12,10 @@ const nextConfig: NextConfig = {
         unoptimized: true,
     },
 
-    // Next writes revalidated pages to .next/server/app rather than to .next/cache, which the
-    // read-only root filesystem does not allow. Keep the incremental cache in memory.
+    // Next writes revalidated pages into the build output at .next/server/app, which the
+    // read-only root filesystem does not allow and a volume cannot cover without masking the
+    // build. This keeps the whole incremental cache, pages and fetches alike, in memory, so a
+    // restart refetches the logos rather than reading them back from disk.
     experimental: { isrFlushToDisk: false },
 
     async headers() {
