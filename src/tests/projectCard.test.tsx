@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { render } from '@testing-library/react';
 import ProjectCard from '@/components/ProjectCard';
@@ -14,6 +15,12 @@ describe('ProjectCard', () => {
 
             expect(container.querySelector(`#prosjekt-${project.slug}`)).not.toBeNull();
             unmount();
+        }
+    });
+
+    it('bundles every fallback logo it points at', () => {
+        for (const project of PROJECTS) {
+            expect(existsSync(`public${project.fallbackLogo}`), project.fallbackLogo).toBe(true);
         }
     });
 });

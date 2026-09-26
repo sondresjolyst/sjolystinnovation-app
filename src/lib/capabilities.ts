@@ -13,14 +13,14 @@ export const CAPABILITIES: readonly Capability[] = [
     {
         slug: 'nettsteder-og-apper',
         title: 'Nettsteder og apper',
-        blurb: 'Nettsider, nettbutikker og mobilapper, laget for det du skal bruke dem til.',
+        blurb: 'Nettsider, apper og nettbutikker, laget for det du skal bruke dem til.',
         projects: ['altinnendata', 'nstuning', 'pyttogpanne'],
     },
     {
         slug: 'elektronikk-og-automasjon',
         title: 'Elektronikk og automasjon',
-        blurb: 'Sensorer og styring for hjemmet og garasjen, med en app som viser hva som skjer.',
-        projects: ['garge'],
+        blurb: 'Sensorer og styring for hjemmet og garasjen, med apper som viser hva som skjer.',
+        projects: ['garge', 'si-tyre-analyzer'],
     },
     {
         slug: 'tre-og-metall',

@@ -17,8 +17,7 @@ export default function Footer() {
                             {COMPANY.name}
                         </a>
                         <p className="mt-4 max-w-xs text-sm leading-relaxed">
-                            {COMPANY.tagline}. Nettsteder, apper, elektronikk og produkter i tre og metall, laget på
-                            Lye.
+                            {COMPANY.tagline}. Vi holder til på Lye.
                         </p>
                     </div>
 

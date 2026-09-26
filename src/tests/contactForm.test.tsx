@@ -14,7 +14,7 @@ async function fillAndSubmit() {
     const user = userEvent.setup();
     await user.type(screen.getByLabelText('Navn'), 'Kari');
     await user.type(screen.getByLabelText('E-post'), 'kari@example.no');
-    await user.type(screen.getByLabelText(/Hva kan vi hjelpe med/), 'En nettside.');
+    await user.type(screen.getByLabelText(/Hva kan vi hjelpe deg med/), 'En nettside.');
     await user.click(screen.getByRole('button', { name: 'Send melding' }));
 }
 
@@ -26,7 +26,7 @@ describe('ContactForm', () => {
     it('describes the message field with the helper text', () => {
         render(<ContactForm />);
 
-        expect(screen.getByLabelText(/Hva kan vi hjelpe med/)).toHaveAccessibleDescription(
+        expect(screen.getByLabelText(/Hva kan vi hjelpe deg med/)).toHaveAccessibleDescription(
             'Hva skal lages, hvem skal bruke det, og når trenger du det?',
         );
     });
