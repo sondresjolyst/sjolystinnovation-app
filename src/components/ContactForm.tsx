@@ -88,7 +88,7 @@ export default function ContactForm() {
             </label>
 
             <label className="grid gap-2 text-sm">
-                <span className="font-medium">Hva kan vi hjelpe med?</span>
+                <span className="font-medium">Hva kan vi hjelpe deg med?</span>
                 <span id="melding-hjelp" className="-mt-1 text-muted">
                     Hva skal lages, hvem skal bruke det, og når trenger du det?
                 </span>

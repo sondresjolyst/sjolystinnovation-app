@@ -14,7 +14,8 @@ export interface Project {
     fallbackLogo: string;
     /**
      * Public `/api/branding` endpoint, where the project has one. Only altinnendata-api and
-     * nstuning-api expose it. garge-api and pyttogpanne-api have no Branding feature.
+     * nstuning-api expose it. garge-api and pyttogpanne-api have no Branding feature, and
+     * si-tyre-analyzer has no server at all.
      */
     brandingApi?: string;
 }
@@ -69,5 +70,17 @@ export const PROJECTS: readonly Project[] = [
         status: 'in-development',
         accent: '#C0431C',
         fallbackLogo: '/projects/pyttogpanne.png',
+    },
+    {
+        slug: 'si-tyre-analyzer',
+        name: 'SI Tyre Analyzer',
+        tagline: 'Dekktemperatur på alle fire hjul',
+        description:
+            'Sensorer på hvert hjul følger dekktemperaturen gjennom hele økten, fra innerkant til ytterkant av slitebanen. Du følger alle fire hjul live mens du kjører, og etter økten ser du om dekket jobber jevnt over hele bredden og hvor mye av tiden det lå på riktig temperatur.',
+        url: 'https://github.com/sondresjolyst/si-tyre-analyzer',
+        linkText: 'Se på GitHub',
+        status: 'live',
+        accent: '#94a3b8',
+        fallbackLogo: '/projects/si-tyre-analyzer.svg',
     },
 ] as const;
