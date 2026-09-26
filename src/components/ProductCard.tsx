@@ -8,7 +8,7 @@ export default function ProductCard({ product }: { product: Product }) {
             <figure>
                 {/* Each photo keeps its own aspect ratio; a shared one crops the upright shots. */}
                 <Photo
-                    src={product.image}
+                    src={`/products/${product.slug}`}
                     alt={product.alt}
                     width={product.width}
                     height={product.height}
