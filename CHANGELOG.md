@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.1.1...v1.2.0) (2026-09-26)
+
+
+### Features
+
+* add SI Tyre Analyzer ([#13](https://github.com/sondresjolyst/sjolystinnovation-app/issues/13)) ([ebe2c35](https://github.com/sondresjolyst/sjolystinnovation-app/commit/ebe2c352f320c4ed23fc0b8bdff9c118096a58a6))
+
 ## [1.1.1](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.1.0...v1.1.1) (2026-09-25)
 
 
