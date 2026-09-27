@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.3.0](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.2.0...v1.3.0) (2026-09-27)
+
+
+### Features
+
+* add structured data, a share image and capability chips ([#18](https://github.com/sondresjolyst/sjolystinnovation-app/issues/18)) ([2716863](https://github.com/sondresjolyst/sjolystinnovation-app/commit/2716863db87863404a38df76d4e746ff9cb91dcd))
+
+
+### Bug Fixes
+
+* chip links for capability proof, and a working lint ([#17](https://github.com/sondresjolyst/sjolystinnovation-app/issues/17)) ([9fa652e](https://github.com/sondresjolyst/sjolystinnovation-app/commit/9fa652ead880559af72dcb9732b0f90536513b58))
+
+
+### Dependencies
+
+* **npm:** bump eslint from 10.10.0 to 10.11.0 in the eslint group ([#15](https://github.com/sondresjolyst/sjolystinnovation-app/issues/15)) ([cceffd7](https://github.com/sondresjolyst/sjolystinnovation-app/commit/cceffd70c5743f11d153850df640428942deb49f))
+
 ## [1.2.0](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.1.1...v1.2.0) (2026-09-26)
 
 
