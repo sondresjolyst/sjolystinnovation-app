@@ -1,4 +1,5 @@
 import { COMPANY } from '@/lib/company';
+import { INTRO } from '@/lib/copy';
 
 export default function Hero() {
     return (
@@ -9,7 +10,7 @@ export default function Hero() {
                 </h1>
 
                 <p className="mt-6 max-w-2xl text-lg leading-relaxed text-background/75 text-pretty sm:text-xl">
-                    Vi bygger nettsteder, apper og elektronikk, og lager produkter i tre og metall.
+                    {INTRO}
                 </p>
 
                 <div className="mt-10 flex flex-wrap gap-3">

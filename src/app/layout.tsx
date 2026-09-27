@@ -3,10 +3,12 @@ import { GeistSans } from 'geist/font/sans';
 import { Toaster } from 'sonner';
 import { COMPANY } from '@/lib/company';
 import { BRAND } from '@/lib/seo/brand';
+import { organizationNode, webSiteNode } from '@/lib/seo/schema/organization';
+import JsonLd from '@/components/JsonLd';
 import './globals.css';
 
 const BESKRIVELSE =
-    'Sjølyst Innovation på Lye bygger nettsteder, apper og elektronikk, og lager produkter i tre og metall. Se hva vi har levert, og ta kontakt.';
+    'Sjølyst Innovation bygger programvare og maskinvare, fra nettsteder og mobilapper til elektronikk og maskinering. Se prosjektene vi har levert.';
 
 export const metadata: Metadata = {
     metadataBase: new URL(COMPANY.url),
@@ -21,6 +23,11 @@ export const metadata: Metadata = {
         siteName: COMPANY.name,
         locale: 'nb_NO',
         url: COMPANY.url,
+        title: `${COMPANY.name} | ${COMPANY.tagline}`,
+        description: BESKRIVELSE,
+    },
+    twitter: {
+        card: 'summary_large_image',
         title: `${COMPANY.name} | ${COMPANY.tagline}`,
         description: BESKRIVELSE,
     },
@@ -42,6 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     Hopp til innhold
                 </a>
                 {children}
+                <JsonLd nodes={[organizationNode(COMPANY), webSiteNode()]} />
                 <Toaster position="bottom-right" richColors />
             </body>
         </html>

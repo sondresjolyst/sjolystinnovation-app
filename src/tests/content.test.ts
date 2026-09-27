@@ -18,5 +18,6 @@ describe('content kept in sync', () => {
         expect(css).toContain(`--color-background: ${BRAND.background};`);
         expect(css).toContain(`--color-foreground: ${BRAND.foreground};`);
         expect(css).toContain(`--color-primary: ${BRAND.primary};`);
+        expect(css).toContain(`--color-muted: ${BRAND.muted};`);
     });
 });

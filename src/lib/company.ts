@@ -1,4 +1,4 @@
-interface Company {
+export interface Company {
     /** Brand name, for headings and marketing copy. */
     name: string;
     /** Registered foretaksnavn, for the footer and any formal context. */
@@ -11,7 +11,13 @@ interface Company {
     /** Shown next to the org number, which foretaksregisterloven § 10-2 requires of an AS. */
     register: string;
     vatRegistered: boolean;
+    /** One-line address, for the footer and the contact block. */
     address: string;
+    /** The address again, split into the fields a local listing is matched on. */
+    streetAddress: string;
+    postalCode: string;
+    addressLocality: string;
+    addressRegion: string;
     /** Empty fields are hidden by the footer and the contact block. */
     email: string;
     phone: string;
@@ -28,6 +34,10 @@ export const COMPANY: Company = {
     register: "Foretaksregisteret",
     vatRegistered: false,
     address: "Mårvegen 21A, 4347 Lye",
+    streetAddress: "Mårvegen 21A",
+    postalCode: "4347",
+    addressLocality: "Lye",
+    addressRegion: "Rogaland",
     email: "sondresjoelyst@gmail.com",
     phone: "",
     url: "https://www.sjolystinnovation.no",
