@@ -27,6 +27,6 @@ export const CAPABILITIES: readonly Capability[] = [
         title: 'Tre og metall',
         blurb: 'Bruksting, møbler og enkeltstykker, tegnet digitalt og frest med CNC.',
         projects: [],
-        section: { label: 'eksemplene', href: '#produkter' },
+        section: { label: 'Eksempler', href: '#produkter' },
     },
 ];
