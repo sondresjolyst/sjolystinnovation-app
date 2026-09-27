@@ -5,5 +5,6 @@
 export const BRAND = {
     background: '#ffffff',
     foreground: '#0f1115',
+    muted: '#5b616e',
     primary: '#4f46e5',
 } as const;
