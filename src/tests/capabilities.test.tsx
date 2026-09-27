@@ -27,4 +27,21 @@ describe('capabilities', () => {
 
         expect(hrefs).toEqual(expected);
     });
+
+    it('render each proof as its own chip, not as words inside a sentence', () => {
+        render(<Capabilities />);
+
+        const links = screen.getAllByRole('link');
+        const expected = CAPABILITIES.flatMap(capability => [
+            ...capability.projects.map(slug => PROJECTS.find(project => project.slug === slug)?.name),
+            ...(capability.section ? [capability.section.label] : []),
+        ]);
+
+        expect(links.map(link => link.textContent)).toEqual(expected);
+
+        // A chip owns its list item, so no connecting prose can sit next to the label.
+        for (const link of links) {
+            expect(link.closest('li')?.textContent).toBe(link.textContent);
+        }
+    });
 });
