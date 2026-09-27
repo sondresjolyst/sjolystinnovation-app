@@ -8,7 +8,7 @@ import JsonLd from '@/components/JsonLd';
 import './globals.css';
 
 const BESKRIVELSE =
-    'Sjølyst Innovation på Lye bygger nettsteder, apper og elektronikk, og lager produkter i tre og metall. Se hva vi har levert, og ta kontakt.';
+    'Sjølyst Innovation bygger programvare og maskinvare, fra nettsteder og mobilapper til elektronikk og maskinering. Se prosjektene vi har levert.';
 
 export const metadata: Metadata = {
     metadataBase: new URL(COMPANY.url),
