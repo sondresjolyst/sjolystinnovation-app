@@ -3,6 +3,8 @@ import { GeistSans } from 'geist/font/sans';
 import { Toaster } from 'sonner';
 import { COMPANY } from '@/lib/company';
 import { BRAND } from '@/lib/seo/brand';
+import { organizationNode, webSiteNode } from '@/lib/seo/schema/organization';
+import JsonLd from '@/components/JsonLd';
 import './globals.css';
 
 const BESKRIVELSE =
@@ -24,6 +26,11 @@ export const metadata: Metadata = {
         title: `${COMPANY.name} | ${COMPANY.tagline}`,
         description: BESKRIVELSE,
     },
+    twitter: {
+        card: 'summary_large_image',
+        title: `${COMPANY.name} | ${COMPANY.tagline}`,
+        description: BESKRIVELSE,
+    },
     manifest: '/manifest.json',
 };
 
@@ -42,6 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     Hopp til innhold
                 </a>
                 {children}
+                <JsonLd nodes={[organizationNode(COMPANY), webSiteNode()]} />
                 <Toaster position="bottom-right" richColors />
             </body>
         </html>
