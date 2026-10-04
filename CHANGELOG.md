@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.3.1](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.3.0...v1.3.1) (2026-10-04)
+
+
+### Dependencies
+
+* **npm:** bump @types/node from 26.6.2 to 26.6.3 in the types group ([#23](https://github.com/sondresjolyst/sjolystinnovation-app/issues/23)) ([d591887](https://github.com/sondresjolyst/sjolystinnovation-app/commit/d591887bee0363d1b1ae97abe2efc191e3b67d81))
+* **npm:** bump eslint-config-next from 16.3.5 to 16.3.6 in the next group ([#20](https://github.com/sondresjolyst/sjolystinnovation-app/issues/20)) ([64b6658](https://github.com/sondresjolyst/sjolystinnovation-app/commit/64b6658a4e8e896b00a28f8c62260f9970bd9539))
+* **npm:** bump vitest from 5.0.1 to 5.0.2 in the testing group ([#22](https://github.com/sondresjolyst/sjolystinnovation-app/issues/22)) ([6cd4779](https://github.com/sondresjolyst/sjolystinnovation-app/commit/6cd477910edfbc0326f59120fd69a50a9ea1624b))
+
 ## [1.3.0](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.2.0...v1.3.0) (2026-09-27)
 
 
