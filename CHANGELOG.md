@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.3.2](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.3.1...v1.3.2) (2026-10-06)
+
+
+### Dependencies
+
+* **npm:** bump `sharp` from 0.35.4 to 0.35.5 ([#27](https://github.com/sondresjolyst/sjolystinnovation-app/issues/27)) ([8e99434](https://github.com/sondresjolyst/sjolystinnovation-app/commit/8e994340e881892e7ebe407e9a179f2375cf9a3a))
+* **npm:** bump `source-map-js` from 1.2.1 to 1.2.2 ([#26](https://github.com/sondresjolyst/sjolystinnovation-app/issues/26)) ([406495d](https://github.com/sondresjolyst/sjolystinnovation-app/commit/406495ddd57459f8288e9c88fea50791db5cc52e))
+* **npm:** bump the next group across 1 directory with 2 updates ([#28](https://github.com/sondresjolyst/sjolystinnovation-app/issues/28)) ([c9055e9](https://github.com/sondresjolyst/sjolystinnovation-app/commit/c9055e99648063fe2fec4264579c8d7aeecf4585))
+
 ## [1.3.1](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.3.0...v1.3.1) (2026-10-04)
 
 
