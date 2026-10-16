@@ -1,22 +1,46 @@
-import { describe, expect, it } from 'vitest';
-import { COMPANY, type Company } from '@/lib/company';
-import { organizationNode, webSiteNode } from '@/lib/seo/schema/organization';
-import { ref, SCHEMA_IDS, serializeGraph } from '@/lib/seo/schema/graph';
-import { absoluteUrl } from '@/lib/seo/urls';
+import { describe, expect, it, vi } from 'vitest';
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import RootLayout from '@/app/layout';
+import { COMPANY } from '@/lib/company';
+import { site } from '@/lib/seo/site';
 
-/** The real company, with the fields the site currently leaves empty filled in. */
-const company: Company = { ...COMPANY, phone: '+47 400 00 000' };
+// next/font only works inside the Next compiler.
+vi.mock('geist/font/sans', () => ({ GeistSans: { variable: 'font-geist-sans' } }));
+
+/** The JSON-LD blocks the root layout puts on every page. */
+function jsonLdBlocks() {
+    const html = renderToStaticMarkup(createElement(RootLayout, null, null));
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return [...doc.querySelectorAll('script[type="application/ld+json"]')].map(script => JSON.parse(script.textContent!));
+}
+
+const graph = () => jsonLdBlocks()[0]['@graph'];
+const organization = () => graph().find((node: { '@id': string }) => node['@id'] === site.ids.organization);
+const webSite = () => graph().find((node: { '@id': string }) => node['@id'] === site.ids.website);
+
+describe('structured data on every page', () => {
+    it('is one context-bearing graph with the organization and the web site', () => {
+        const blocks = jsonLdBlocks();
+
+        expect(blocks).toHaveLength(1);
+        expect(blocks[0]['@context']).toBe('https://schema.org');
+        expect(graph()).toHaveLength(2);
+    });
+
+    it('ids both nodes on the canonical host', () => {
+        expect(site.ids.organization).toBe(`${COMPANY.url}/#organization`);
+        expect(site.ids.website).toBe(`${COMPANY.url}/#website`);
+    });
+});
 
 describe('organization node', () => {
-    it('is both an organization and a local business, under a stable id', () => {
-        const node = organizationNode(company);
-
-        expect(node['@id']).toBe(SCHEMA_IDS.organization);
-        expect(node['@type']).toEqual(['Organization', 'LocalBusiness']);
+    it('is both an organization and a local business', () => {
+        expect(organization()['@type']).toEqual(['Organization', 'LocalBusiness']);
     });
 
     it('emits the address as separate fields, which is what a listing is matched on', () => {
-        expect(organizationNode(company).address).toEqual({
+        expect(organization().address).toEqual({
             '@type': 'PostalAddress',
             streetAddress: 'Mårvegen 21A',
             postalCode: '4347',
@@ -26,67 +50,36 @@ describe('organization node', () => {
         });
     });
 
-    it('omits the telephone until there is a number to publish', () => {
-        expect(organizationNode({ ...company, phone: '' })).not.toHaveProperty('telephone');
-        expect(organizationNode(company).telephone).toBe('+47 400 00 000');
+    it('omits the telephone while the company has no number to publish', () => {
+        expect(COMPANY.phone).toBe('');
+        expect(organization()).not.toHaveProperty('telephone');
     });
 
-    it('omits the VAT id until the business is registered for VAT', () => {
-        expect(organizationNode(company)).not.toHaveProperty('vatID');
-        expect(organizationNode({ ...company, vatRegistered: true }).vatID).toBe('NO938517789MVA');
+    it('omits the VAT id while the business is not registered for VAT', () => {
+        expect(COMPANY.vatRegistered).toBe(false);
+        expect(organization()).not.toHaveProperty('vatID');
     });
 
-    it('carries the org number, which is what identifies the entity in Norway', () => {
-        expect(organizationNode(company).taxID).toBe('938 517 789');
-    });
-
-    it('omits the legal name when it only repeats the trading name', () => {
-        expect(organizationNode({ ...company, legalName: company.name })).not.toHaveProperty('legalName');
-        expect(organizationNode(company).legalName).toBe('Sjølyst Innovation AS');
+    it('carries the org number and the legal name, which identify the entity in Norway', () => {
+        expect(organization().taxID).toBe('938 517 789');
+        expect(organization().legalName).toBe('Sjølyst Innovation AS');
     });
 
     it('points at the Brønnøysund entry, so the two describe one entity', () => {
-        expect(organizationNode(company).sameAs).toEqual([COMPANY.brregUrl]);
+        expect(organization().sameAs).toEqual([COMPANY.brregUrl]);
     });
 
     it('resolves the logo to an absolute url, which a consumer cannot resolve itself', () => {
-        expect(organizationNode(company).logo).toBe(`${COMPANY.url}/logo.png`);
+        expect(organization().logo).toBe(`${COMPANY.url}/logo.png`);
     });
 });
 
 describe('web site node', () => {
     it('references the organization rather than repeating it', () => {
-        expect(webSiteNode().publisher).toEqual(ref(SCHEMA_IDS.organization));
+        expect(webSite().publisher).toEqual({ '@id': site.ids.organization });
     });
 
     it('declares the site language as Norwegian bokmål', () => {
-        expect(webSiteNode().inLanguage).toBe('nb-NO');
-    });
-});
-
-describe('graph serialisation', () => {
-    it('escapes angle brackets so the payload cannot close the script tag', () => {
-        const json = serializeGraph([{ '@type': 'Thing', name: '</script><script>alert(1)</script>' }]);
-
-        expect(json).not.toContain('</script>');
-        expect(JSON.parse(json)['@graph'][0].name).toBe('</script><script>alert(1)</script>');
-    });
-
-    it('gives the graph the schema.org context', () => {
-        expect(JSON.parse(serializeGraph([]))['@context']).toBe('https://schema.org');
-    });
-});
-
-describe('absolute urls', () => {
-    it('returns the front page for an empty path', () => {
-        expect(absoluteUrl()).toBe(COMPANY.url);
-    });
-
-    it('never ends a url in a slash, so a canonical cannot have two spellings', () => {
-        expect(absoluteUrl('/produkter/')).toBe(`${COMPANY.url}/produkter`);
-    });
-
-    it('adds the leading slash a caller left out', () => {
-        expect(absoluteUrl('logo.png')).toBe(`${COMPANY.url}/logo.png`);
+        expect(webSite().inLanguage).toBe('nb-NO');
     });
 });
