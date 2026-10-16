@@ -1,14 +1,6 @@
-import { MetadataRoute } from 'next';
-import { COMPANY } from '@/lib/company';
+import { site } from '@/lib/seo/site';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default function sitemap() {
     // Section anchors are not separate URLs.
-    return [
-        {
-            url: `${COMPANY.url}/`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 1,
-        },
-    ];
+    return site.localeEntries('');
 }

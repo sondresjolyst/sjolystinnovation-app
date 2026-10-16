@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import { GeistSans } from 'geist/font/sans';
 import { Toaster } from 'sonner';
 import { COMPANY } from '@/lib/company';
+import { JsonLd } from '@sjolystinnovation/app-kit/seo';
 import { BRAND } from '@/lib/seo/brand';
-import { organizationNode, webSiteNode } from '@/lib/seo/schema/organization';
-import JsonLd from '@/components/JsonLd';
+import { site } from '@/lib/seo/site';
 import './globals.css';
 
 const BESKRIVELSE =
@@ -49,7 +49,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     Hopp til innhold
                 </a>
                 {children}
-                <JsonLd nodes={[organizationNode(COMPANY), webSiteNode()]} />
+                <JsonLd
+                    nodes={[
+                        site.organizationNode(COMPANY, { type: ['Organization', 'LocalBusiness'], sameAs: [COMPANY.brregUrl] }),
+                        site.webSiteNode('nb-NO'),
+                    ]}
+                />
                 <Toaster position="bottom-right" richColors />
             </body>
         </html>

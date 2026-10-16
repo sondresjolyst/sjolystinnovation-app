@@ -1,9 +1,17 @@
-import type { NextConfig } from "next";
+import { defineAppConfig } from '@sjolystinnovation/app-kit/next-config';
 
-const nextConfig: NextConfig = {
-    output: 'standalone',
-    poweredByHeader: false,
-
+export default defineAppConfig({
+    apiUrl: undefined,
+    dev: process.env.NODE_ENV !== 'production',
+    // Files under public/ are served with no max-age, so every repeat view revalidates each photo.
+    // They are content that changes only when a photo is replaced.
+    pathHeaders: [{
+        source: '/:path*.(avif|jpg|png|svg|ico|webp)',
+        headers: [
+            { key: 'Cache-Control', value: 'public, max-age=3600, stale-while-revalidate=86400' },
+        ],
+    }],
+}, {
     // scripts/prepare-images.mjs already resizes every photo to its display size and encodes it
     // as mozjpeg, so the runtime optimizer would re-encode work that is already done. Serving the
     // files as they are also keeps the root filesystem read-only, since the optimizer's only
@@ -11,57 +19,4 @@ const nextConfig: NextConfig = {
     images: {
         unoptimized: true,
     },
-
-    // Next writes revalidated pages into the build output at .next/server/app, which the
-    // read-only root filesystem does not allow and a volume cannot cover without masking the
-    // build. This keeps the whole incremental cache, pages and fetches alike, in memory, so a
-    // restart refetches the logos rather than reading them back from disk.
-    experimental: { isrFlushToDisk: false },
-
-    async headers() {
-        const isDev = process.env.NODE_ENV !== 'production';
-        const scriptSrc = isDev
-            ? "script-src 'self' 'unsafe-eval' 'unsafe-inline'"
-            : "script-src 'self' 'unsafe-inline'";
-
-        const csp = [
-            "default-src 'self'",
-            scriptSrc,
-            "style-src 'self' 'unsafe-inline'",
-            "img-src 'self' data:",
-            "connect-src 'self'",
-            "frame-src 'self'",
-            "object-src 'none'",
-            "font-src 'self'",
-            "base-uri 'self'",
-            "form-action 'self'",
-            "frame-ancestors 'none'",
-            "upgrade-insecure-requests",
-        ].join('; ');
-
-        return [
-            {
-                // Files under public/ are served with no max-age, so every repeat view revalidates
-                // each photo. They are content that changes only when a photo is replaced.
-                source: '/:path*.(avif|jpg|png|svg|ico|webp)',
-                headers: [
-                    { key: 'Cache-Control', value: 'public, max-age=3600, stale-while-revalidate=86400' },
-                ],
-            },
-            {
-                source: '/:path*',
-                headers: [
-                    { key: 'X-Content-Type-Options', value: 'nosniff' },
-                    { key: 'X-Frame-Options', value: 'DENY' },
-                    { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-                    { key: 'X-DNS-Prefetch-Control', value: 'on' },
-                    { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
-                    { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains' },
-                    { key: 'Content-Security-Policy', value: csp },
-                ],
-            },
-        ];
-    },
-};
-
-export default nextConfig;
+});
