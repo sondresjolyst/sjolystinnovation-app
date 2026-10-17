@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.3.2](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.3.1...v1.3.2) (2026-10-17)
+
+
+### Dependencies
+
+* **npm:** bump @types/node from 26.6.3 to 26.6.4 in the types group ([#34](https://github.com/sondresjolyst/sjolystinnovation-app/issues/34)) ([ca5e268](https://github.com/sondresjolyst/sjolystinnovation-app/commit/ca5e268a339b62a2427f5979495d63497db0c46f))
+* **npm:** bump `eslint-config-next` from 16.3.7 to 16.3.8 ([#36](https://github.com/sondresjolyst/sjolystinnovation-app/issues/36)) ([f0f5f59](https://github.com/sondresjolyst/sjolystinnovation-app/commit/f0f5f59d5489db47e9268be12a157d03afc4c5cb))
+* **npm:** bump `next` from 16.3.7 to 16.4.0 ([#35](https://github.com/sondresjolyst/sjolystinnovation-app/issues/35)) ([4f46126](https://github.com/sondresjolyst/sjolystinnovation-app/commit/4f46126976d2164da018f6cceff983c12883c277))
+* **npm:** bump `sharp` from 0.35.4 to 0.35.5 ([#27](https://github.com/sondresjolyst/sjolystinnovation-app/issues/27)) ([8e99434](https://github.com/sondresjolyst/sjolystinnovation-app/commit/8e994340e881892e7ebe407e9a179f2375cf9a3a))
+* **npm:** bump `source-map-js` from 1.2.1 to 1.2.2 ([#26](https://github.com/sondresjolyst/sjolystinnovation-app/issues/26)) ([406495d](https://github.com/sondresjolyst/sjolystinnovation-app/commit/406495ddd57459f8288e9c88fea50791db5cc52e))
+* **npm:** bump the next group across 1 directory with 2 updates ([#28](https://github.com/sondresjolyst/sjolystinnovation-app/issues/28)) ([c9055e9](https://github.com/sondresjolyst/sjolystinnovation-app/commit/c9055e99648063fe2fec4264579c8d7aeecf4585))
+* **npm:** bump vitest from 5.0.2 to 5.0.3 in the testing group ([#33](https://github.com/sondresjolyst/sjolystinnovation-app/issues/33)) ([9977a4c](https://github.com/sondresjolyst/sjolystinnovation-app/commit/9977a4cc7d0d22a838ca3c31f5db2bd542ee8050))
+
 ## [1.3.1](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.3.0...v1.3.1) (2026-10-04)
 
 
