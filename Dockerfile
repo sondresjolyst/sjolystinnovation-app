@@ -2,7 +2,7 @@ FROM node:26.10.0-slim AS builder
 
 # Names the environment being built for. Anything but prod/production serves a robots.txt that
 # disallows crawling, so a test host is not indexed as a duplicate of the live site.
-ARG SITE_ENV=dev
+ARG SITE_ENV
 ENV SITE_ENV=${SITE_ENV}
 
 WORKDIR /app
@@ -21,7 +21,7 @@ FROM node:26.10.0-slim AS runner
 
 WORKDIR /app
 
-ARG SITE_ENV=dev
+ARG SITE_ENV
 ENV SITE_ENV=${SITE_ENV}
 ENV NODE_ENV=production
 ENV HOSTNAME=0.0.0.0

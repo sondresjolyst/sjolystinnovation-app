@@ -35,7 +35,7 @@ The site runs on empty environment variables. Only the contact form needs them f
 | `BREVO_SENDER_EMAIL` | Sender address, must be verified in Brevo |
 | `BREVO_SENDER_NAME` | Sender name |
 | `CONTACT_TO_EMAIL` | Recipient of contact form enquiries |
-| `SITE_ENV` | `prod` allows crawling, anything else serves `Disallow: /` |
+| `SITE_ENV` | `prod`, `production` or unset allows crawling, anything else serves `Disallow: /` |
 
 The four Brevo variables are read inside the request handler. `SITE_ENV` is a Docker build argument.
 
