@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { formatOrgNumber } from '@sjolystinnovation/app-kit/company';
 import { COMPANY } from '@/lib/company';
 import { NAV_LINKS } from '@/lib/navigation';
 
@@ -68,7 +69,7 @@ export default function Footer() {
                             rel="noopener noreferrer"
                             className="underline underline-offset-4 transition-colors hover:text-background"
                         >
-                            {COMPANY.orgNumber}
+                            {formatOrgNumber(COMPANY)}
                         </a>{' '}
                         {COMPANY.register}
                     </p>
