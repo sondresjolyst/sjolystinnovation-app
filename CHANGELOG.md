@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.4.0...v1.4.1) (2026-10-21)
+
+
+### Dependencies
+
+* **npm:** bump `vite` from 8.3.0 to 8.3.4 ([#53](https://github.com/sondresjolyst/sjolystinnovation-app/issues/53)) ([2e7233a](https://github.com/sondresjolyst/sjolystinnovation-app/commit/2e7233ac2929fc5d6e32c2afc1779d5df3668db6))
+
 ## [1.4.0](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.3.1...v1.4.0) (2026-10-18)
 
 
