@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.3](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.4.2...v1.4.3) (2026-10-22)
+
+
+### Dependencies
+
+* **npm:** bump next to 16.4.2 ([#57](https://github.com/sondresjolyst/sjolystinnovation-app/issues/57)) ([e33b189](https://github.com/sondresjolyst/sjolystinnovation-app/commit/e33b1892d1f0ee5bcba9aa282af3b19ca13db0a9))
+
 ## [1.4.2](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.4.1...v1.4.2) (2026-10-21)
 
 
