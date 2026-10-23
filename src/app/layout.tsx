@@ -3,6 +3,7 @@ import { GeistSans } from 'geist/font/sans';
 import { Toaster } from 'sonner';
 import { COMPANY } from '@/lib/company';
 import { JsonLd } from '@sjolystinnovation/app-kit/seo';
+import { brregUrl } from '@sjolystinnovation/app-kit/company';
 import { BRAND } from '@/lib/seo/brand';
 import { site } from '@/lib/seo/site';
 import './globals.css';
@@ -51,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 {children}
                 <JsonLd
                     nodes={[
-                        site.organizationNode(COMPANY, { type: ['Organization', 'LocalBusiness'], sameAs: [COMPANY.brregUrl] }),
+                        site.organizationNode(COMPANY, { type: ['Organization', 'LocalBusiness'], sameAs: [brregUrl(COMPANY.orgNumber)] }),
                         site.webSiteNode('nb-NO'),
                     ]}
                 />
