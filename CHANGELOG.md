@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.4](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.4.3...v1.4.4) (2026-10-23)
+
+
+### Miscellaneous Chores
+
+* release 1.4.4 ([#61](https://github.com/sondresjolyst/sjolystinnovation-app/issues/61)) ([d72c853](https://github.com/sondresjolyst/sjolystinnovation-app/commit/d72c8531948ac4565ae9f588749d236a3070b3fc))
+
 ## [1.4.3](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.4.2...v1.4.3) (2026-10-22)
 
 
