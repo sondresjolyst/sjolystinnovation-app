@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import RootLayout from '@/app/layout';
+import { brregUrl } from '@sjolystinnovation/app-kit/company';
 import { COMPANY } from '@/lib/company';
 import { site } from '@/lib/seo/site';
 
@@ -66,7 +67,7 @@ describe('organization node', () => {
     });
 
     it('points at the Brønnøysund entry, so the two describe one entity', () => {
-        expect(organization().sameAs).toEqual([COMPANY.brregUrl]);
+        expect(organization().sameAs).toEqual([brregUrl(COMPANY.orgNumber)]);
     });
 
     it('resolves the logo to an absolute url, which a consumer cannot resolve itself', () => {

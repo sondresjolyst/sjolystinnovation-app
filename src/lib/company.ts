@@ -22,7 +22,6 @@ export interface Company {
     email: string;
     phone: string;
     url: string;
-    brregUrl: string;
 }
 
 export const COMPANY: Company = {
@@ -41,5 +40,4 @@ export const COMPANY: Company = {
     email: "sondresjoelyst@gmail.com",
     phone: "",
     url: "https://www.sjolystinnovation.no",
-    brregUrl: "https://virksomhet.brreg.no/nb/oppslag/enheter/938517789",
 };

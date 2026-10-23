@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { formatOrgNumber } from '@sjolystinnovation/app-kit/company';
+import { brregUrl, formatOrgNumber } from '@sjolystinnovation/app-kit/company';
 import { COMPANY } from '@/lib/company';
 import { NAV_LINKS } from '@/lib/navigation';
 
@@ -64,7 +64,7 @@ export default function Footer() {
                     <p>
                         Org.nr.{' '}
                         <a
-                            href={COMPANY.brregUrl}
+                            href={brregUrl(COMPANY.orgNumber)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="underline underline-offset-4 transition-colors hover:text-background"
