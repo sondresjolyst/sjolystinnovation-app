@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.4.5](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.4.4...v1.4.5) (2026-10-25)
+
+
+### Dependencies
+
+* **npm:** bump `geist` from 1.7.2 to 1.8.1 ([#68](https://github.com/sondresjolyst/sjolystinnovation-app/issues/68)) ([d08e8ba](https://github.com/sondresjolyst/sjolystinnovation-app/commit/d08e8bafb5f18149937657de9e42d64bc9f535ce))
+* **npm:** bump postcss from 8.5.29 to 8.5.30 in the tailwind group ([#67](https://github.com/sondresjolyst/sjolystinnovation-app/issues/67)) ([d5143f8](https://github.com/sondresjolyst/sjolystinnovation-app/commit/d5143f8200a48221bb580e77ce0837b773eb10b5))
+* **npm:** bump the react group across 1 directory with 2 updates ([#63](https://github.com/sondresjolyst/sjolystinnovation-app/issues/63)) ([595aeba](https://github.com/sondresjolyst/sjolystinnovation-app/commit/595aeba063f5c3561367e882219800d24e39cf57))
+* **npm:** bump the testing group across 1 directory with 3 updates ([#66](https://github.com/sondresjolyst/sjolystinnovation-app/issues/66)) ([f82929c](https://github.com/sondresjolyst/sjolystinnovation-app/commit/f82929cf5dc22a9116f90827c6a563e67143a2db))
+
 ## [1.4.4](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.4.3...v1.4.4) (2026-10-23)
 
 
