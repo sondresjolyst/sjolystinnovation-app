@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
-    "@sjolystinnovation/app-kit": "^1.5.1",
+    "@sjolystinnovation/app-kit": "^1.6.1",
     "geist": "^1.8.1",
     "next": "^16.4.2",
     "react": "^19.3.1",
