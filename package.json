@@ -15,7 +15,7 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@sjolystinnovation/app-kit": "^1.4.0",
-    "geist": "^1.7.2",
+    "geist": "^1.8.1",
     "next": "^16.4.2",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
