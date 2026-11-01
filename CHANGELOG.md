@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.6](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.4.5...v1.4.6) (2026-11-01)
+
+
+### Dependencies
+
+* **npm:** update zod from 4.6.5 to 4.6.6 ([3754fa7](https://github.com/sondresjolyst/sjolystinnovation-app/commit/3754fa7d13dc3191cf3ca898faae638c6301b28f))
+
 ## [1.4.5](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.4.4...v1.4.5) (2026-10-25)
 
 
