@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.4.7](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.4.6...v1.4.7) (2026-11-08)
+
+
+### Dependencies
+
+* **docker:** update node from 26.12.1-slim to 26.13.0-slim ([ca8454c](https://github.com/sondresjolyst/sjolystinnovation-app/commit/ca8454c93f31818de1686a1627a665b29dcdc536))
+* **npm:** update @heroicons/react from ^2.2.0 to 2.2.0 ([8939f36](https://github.com/sondresjolyst/sjolystinnovation-app/commit/8939f36bc5e3a0a04b9f8b014660391075fe06fd))
+* **npm:** update @sjolystinnovation/app-kit from ^1.6.1 to 1.6.1 ([c8d9795](https://github.com/sondresjolyst/sjolystinnovation-app/commit/c8d979575a86f46171bff2dbf3e4ac3973e633c4))
+* **npm:** update geist from ^1.8.1 to 1.8.1 ([8939f36](https://github.com/sondresjolyst/sjolystinnovation-app/commit/8939f36bc5e3a0a04b9f8b014660391075fe06fd))
+* **npm:** update next from ^16.4.2 to 16.4.2 ([8939f36](https://github.com/sondresjolyst/sjolystinnovation-app/commit/8939f36bc5e3a0a04b9f8b014660391075fe06fd))
+* **npm:** update react from ^19.3.1 to 19.3.1 ([8939f36](https://github.com/sondresjolyst/sjolystinnovation-app/commit/8939f36bc5e3a0a04b9f8b014660391075fe06fd))
+* **npm:** update react-dom from ^19.3.1 to 19.3.1 ([8939f36](https://github.com/sondresjolyst/sjolystinnovation-app/commit/8939f36bc5e3a0a04b9f8b014660391075fe06fd))
+* **npm:** update sonner from ^2.0.8 to 2.0.8 ([8939f36](https://github.com/sondresjolyst/sjolystinnovation-app/commit/8939f36bc5e3a0a04b9f8b014660391075fe06fd))
+* **npm:** update zod from ^4.4.3 to 4.6.6 ([8939f36](https://github.com/sondresjolyst/sjolystinnovation-app/commit/8939f36bc5e3a0a04b9f8b014660391075fe06fd))
+
 ## [1.4.6](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.4.5...v1.4.6) (2026-11-01)
 
 
