@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.4.8](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.4.7...v1.4.8) (2026-11-15)
+
+
+### Dependencies
+
+* **docker:** update node from 26.13.0-slim to 26.13.1-slim ([4bf7c81](https://github.com/sondresjolyst/sjolystinnovation-app/commit/4bf7c813bfc3c5fe4a6c74a84cd683285252f923))
+* **npm:** update @sjolystinnovation/app-kit from ^1.6.1 to 1.6.1 ([e018966](https://github.com/sondresjolyst/sjolystinnovation-app/commit/e0189666143410d4cfae6a9a098a2b7b132ac7d8))
+* **npm:** update geist from 1.8.1 to 1.9.2 ([07eb77d](https://github.com/sondresjolyst/sjolystinnovation-app/commit/07eb77d7d9f4cf2a38b690e1c2f192d5565f5ac1))
+* **npm:** update next from 16.4.2 to 16.4.5 ([07eb77d](https://github.com/sondresjolyst/sjolystinnovation-app/commit/07eb77d7d9f4cf2a38b690e1c2f192d5565f5ac1))
+* **npm:** update zod from 4.6.6 to 4.6.7 ([07eb77d](https://github.com/sondresjolyst/sjolystinnovation-app/commit/07eb77d7d9f4cf2a38b690e1c2f192d5565f5ac1))
+
 ## [1.4.7](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.4.6...v1.4.7) (2026-11-08)
 
 
