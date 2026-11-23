@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.9](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.4.8...v1.4.9) (2026-11-22)
+
+
+### Dependencies
+
+* **npm:** update @sjolystinnovation/app-kit from 1.6.1 to 1.7.0 ([d0ef36e](https://github.com/sondresjolyst/sjolystinnovation-app/commit/d0ef36edfd44a8ca3c86ff5cb7c98ea12d7f0919))
+* **npm:** update next from 16.4.5 to 16.4.6 ([234c875](https://github.com/sondresjolyst/sjolystinnovation-app/commit/234c8756df8a1d026424077a2b1692f6fc94c3d8))
+
 ## [1.4.8](https://github.com/sondresjolyst/sjolystinnovation-app/compare/v1.4.7...v1.4.8) (2026-11-15)
 
 
